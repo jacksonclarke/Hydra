@@ -69,7 +69,7 @@ namespace Unit05.Game.Scripting
             {
                 if (segment.GetPosition().Equals(head.GetPosition()))
                 {
-                    _isGameOver = true;
+                    // _isGameOver = true;
                 }
             }
         }

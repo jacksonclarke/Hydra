@@ -24,13 +24,9 @@ namespace Unit05.Game.Scripting
         public void Execute(Cast cast, Script script)
         {
             List<Actor> actors = cast.GetAllActors();
-
-            Actor enemy = cast.GetFirstActor("enemies");
-
             foreach (Actor actor in actors)
             {
                 actor.MoveNext();
-                enemy.MoveNext();
             }
         }
     }

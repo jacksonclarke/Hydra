@@ -1,5 +1,7 @@
 using Unit05.Game.Casting;
 using Unit05.Game.Services;
+using System;
+using System.Collections.Generic;
 
 
 namespace Unit05.Game.Scripting
@@ -52,6 +54,24 @@ namespace Unit05.Game.Scripting
 
             Snake snake = (Snake)cast.GetFirstActor("snake");
             snake.TurnHead(_direction);
+            List<Actor> snakeBots = cast.GetActors("snakebots");
+            foreach(Snake snakeBot in snakeBots){
+                if ((snakeBot.GetHead().GetPosition().GetX()).Equals(255)){
+                    snakeBot.TurnHead(_direction);
+                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(465)){
+                    snakeBot.TurnHead(_direction);
+                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(795)){
+                    snakeBot.TurnHead(_direction);
+                }else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(255)){
+                    snakeBot.TurnHead(_direction);
+                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(465)){
+                    snakeBot.TurnHead(_direction);
+                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(795)){
+                    snakeBot.TurnHead(_direction);
+                }
+            }
+
+
 
         }
     }

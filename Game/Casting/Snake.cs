@@ -15,10 +15,11 @@ namespace Unit05.Game.Casting
         /// <summary>
         /// Constructs a new instance of a Snake.
         /// </summary>
-        public Snake()
+        public Snake(Point loc)
         {
-            PrepareBody();
+            PrepareBody(loc);
         }
+
 
         /// <summary>
         /// Gets the snake's body segments.
@@ -98,10 +99,10 @@ namespace Unit05.Game.Casting
         /// <summary>
         /// Prepares the snake body for moving.
         /// </summary>
-        private void PrepareBody()
+        private void PrepareBody(Point loc)
         {
-            int x = Constants.MAX_X / 2;
-            int y = Constants.MAX_Y / 2;
+            int x = loc.GetX();
+            int y = loc.GetY();
 
             for (int i = 0; i < Constants.SNAKE_LENGTH; i++)
             {
