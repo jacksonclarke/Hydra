@@ -45,14 +45,21 @@ namespace Unit05.Game.Scripting
             Snake snake = (Snake)cast.GetFirstActor("snake");
             Score score = (Score)cast.GetFirstActor("score");
             Food food = (Food)cast.GetFirstActor("food");
+            Point snakeHead = snake.GetHead().GetPosition();
+            Point snakeRadi = snake.GetHead().GetPosition().Add(new Point(5,5));
             
-            if (snake.GetHead().GetPosition().Equals(food.GetPosition()))
+            if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
             {
                 int points = food.GetPoints();
                 snake.GrowTail(points);
                 score.AddPoints(points);
                 food.Reset();
             }
+        }
+
+        private double DistanceFormula(Point point1, Point point2){
+            double dis = System.Math.Sqrt((point2.GetX() - point1.GetX())^2 + (point2.GetY()-point1.GetY())^2);
+            return dis;
         }
 
         /// <summary>
@@ -64,14 +71,30 @@ namespace Unit05.Game.Scripting
             Snake snake = (Snake)cast.GetFirstActor("snake");
             Actor head = snake.GetHead();
             List<Actor> body = snake.GetBody();
-
-            foreach (Actor segment in body)
-            {
-                if (segment.GetPosition().Equals(head.GetPosition()))
-                {
-                    // _isGameOver = true;
+            List<Actor> snakebots = cast.GetActors("snakebots");
+            
+            foreach (Snake snakebot in snakebots){
+                List<Actor> botBody = snakebot.GetBody();
+                foreach(Actor seg in body){
+                    if(snakebot.GetHead().GetPosition().Equals(seg.GetPosition())){
+                        foreach(Actor botSeg in botBody){
+                            botSeg.SetColor(Constants.WHITE);
+                        }
+                    }
+                foreach(Actor botSeg in botBody){
+                    if(head.GetPosition().Equals(botSeg.GetPosition())){
+                        _isGameOver = true;
+                    }
+                }
                 }
             }
+
+            // foreach (Actor segment in body)
+            // {
+            //     if (segment.GetPosition().Equals(head.GetPosition()))
+            //     {
+            //     }
+            // }
         }
 
         private void HandleGameOver(Cast cast)
