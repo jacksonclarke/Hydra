@@ -11,16 +11,16 @@ namespace Unit05.Game.Casting
     /// </summary>
     public class Food : Actor
     {
-        private int _points = 0;
+        private int _points = 10;
 
         /// <summary>
         /// Constructs a new instance of an Food.
         /// </summary>
-        public Food()
+        public Food(Point loc)
         {
             SetText("@");
             SetColor(Constants.RED); 
-            Reset();
+            Reset(loc);
         }
 
         /// <summary>
@@ -35,15 +35,15 @@ namespace Unit05.Game.Casting
         /// <summary>
         /// Selects a random position and points that the food is worth.
         /// </summary>
-        public void Reset()
+        public void Reset(Point loc)
         {
-            Random random = new Random();
-            _points = random.Next(9);
-            int x = random.Next(Constants.COLUMNS);
-            int y = random.Next(Constants.ROWS);
-            Point position = new Point(x, y);
-            position = position.Scale(Constants.CELL_SIZE);
-            SetPosition(position);
+            // Random random = new Random();
+            // _points = random.Next(9);
+            // int x = random.Next(Constants.COLUMNS);
+            // int y = random.Next(Constants.ROWS);
+            // Point position = new Point(x, y);
+            // Point position = loc.Scale(Constants.CELL_SIZE);
+            SetPosition(loc);
         }
     }
 }

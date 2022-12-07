@@ -44,17 +44,20 @@ namespace Unit05.Game.Scripting
         {
             Snake snake = (Snake)cast.GetFirstActor("snake");
             Score score = (Score)cast.GetFirstActor("score");
-            Food food = (Food)cast.GetFirstActor("food");
+            List<Actor> foods = cast.GetActors("food");
             Point snakeHead = snake.GetHead().GetPosition();
             Point snakeRadi = snake.GetHead().GetPosition().Add(new Point(5,5));
-            
-            if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
-            {
-                int points = food.GetPoints();
-                snake.GrowTail(points);
-                score.AddPoints(points);
-                food.Reset();
+
+            foreach(Food food in foods){
+                if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
+                {
+                    int points = food.GetPoints();
+                    snake.GrowTail(points);
+                    score.AddPoints(points);
+                    // food.RemoveActor();
+                }
             }
+            
         }
 
         private double DistanceFormula(Point point1, Point point2){
@@ -72,13 +75,16 @@ namespace Unit05.Game.Scripting
             Actor head = snake.GetHead();
             List<Actor> body = snake.GetBody();
             List<Actor> snakebots = cast.GetActors("snakebots");
+            List<Actor> food = cast.GetActors("food");
             
             foreach (Snake snakebot in snakebots){
                 List<Actor> botBody = snakebot.GetBody();
                 foreach(Actor seg in body){
                     if(snakebot.GetHead().GetPosition().Equals(seg.GetPosition())){
+                        cast.RemoveActor("snakebots", snakebot);
                         foreach(Actor botSeg in botBody){
-                            botSeg.SetColor(Constants.WHITE);
+                            cast.AddActor("food", new Food(botSeg.GetPosition()));
+                            // botSeg.SetColor(Constants.WHITE);
                         }
                     }
                 foreach(Actor botSeg in botBody){
@@ -120,7 +126,7 @@ namespace Unit05.Game.Scripting
                 {
                     segment.SetColor(Constants.WHITE);
                 }
-                food.SetColor(Constants.WHITE);
+                
             }
         }
 

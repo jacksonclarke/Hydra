@@ -51,6 +51,11 @@ namespace Unit05.Game.Scripting
             {
                 _direction = new Point(0, Constants.CELL_SIZE);
             }
+            if (_keyboardService.IsKeyDown("space"))
+            {
+                // _direction = new Point(0, Contants.CELL_SIZE);
+                Console.WriteLine("SPACE BARRRR");
+            }
 
             Snake snake = (Snake)cast.GetFirstActor("snake");
             snake.TurnHead(_direction);

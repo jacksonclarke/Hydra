@@ -54,20 +54,31 @@ namespace Unit05.Game.Casting
         /// <param name="numberOfSegments">The number of segments to grow.</param>
         public void GrowTail(int numberOfSegments)
         {
-            for (int i = 0; i < numberOfSegments; i++)
-            {
-                Actor tail = _segments.Last<Actor>();
-                Point velocity = tail.GetVelocity();
-                Point offset = velocity.Reverse();
-                Point position = tail.GetPosition().Add(offset);
+            // for (int i = 0; i < numberOfSegments; i++)
+            // {
+            //     Actor tail = _segments.Last<Actor>();
+            //     Point velocity = tail.GetVelocity();
+            //     Point offset = velocity.Reverse();
+            //     Point position = tail.GetPosition().Add(offset);
 
-                Actor segment = new Actor();
-                segment.SetPosition(position);
-                segment.SetVelocity(velocity);
-                segment.SetText("#");
-                segment.SetColor(Constants.GREEN);
-                _segments.Add(segment);
-            }
+            //     Actor segment = new Actor();
+            //     segment.SetPosition(position);
+            //     segment.SetVelocity(velocity);
+            //     segment.SetText("#");
+            //     segment.SetColor(Constants.GREEN);
+            //     _segments.Add(segment);
+            // }
+            Actor tail = _segments.Last<Actor>();
+            Point velocity = tail.GetVelocity();
+            Point offset = velocity.Reverse();
+            Point position = tail.GetPosition().Add(offset);
+
+            Actor segment = new Actor();
+            segment.SetPosition(position);
+            segment.SetVelocity(velocity);
+            segment.SetText("#");
+            segment.SetColor(Constants.GREEN);
+            _segments.Add(segment);
         }
 
         /// <inheritdoc/>

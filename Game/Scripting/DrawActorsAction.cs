@@ -28,7 +28,7 @@ namespace Unit05.Game.Scripting
             List<Actor> segments = snake.GetSegments();
             List<Actor> snakeBots = cast.GetActors("snakebots");
             Actor score = cast.GetFirstActor("score");
-            Actor food = cast.GetFirstActor("food");
+            List<Actor> food = cast.GetActors("food");
             List<Actor> messages = cast.GetActors("messages");
             
             _videoService.ClearBuffer();
@@ -38,7 +38,9 @@ namespace Unit05.Game.Scripting
             }
             _videoService.DrawActors(segments);
             _videoService.DrawActor(score);
-            _videoService.DrawActor(food);
+            foreach(Actor fItem in food ){
+                _videoService.DrawActor(fItem);
+            }
             _videoService.DrawActors(messages);
             _videoService.FlushBuffer();
         }
