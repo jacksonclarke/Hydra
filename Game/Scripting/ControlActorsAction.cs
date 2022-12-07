@@ -57,21 +57,17 @@ namespace Unit05.Game.Scripting
                 Console.WriteLine("SPACE BARRRR");
             }
 
-            Snake snake = (Snake)cast.GetFirstActor("snake");
+            PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
             snake.TurnHead(_direction);
             List<Actor> snakeBots = cast.GetActors("snakebots");
             foreach(Snake snakeBot in snakeBots){
                 if ((snakeBot.GetHead().GetPosition().GetX()).Equals(255)){
                     snakeBot.TurnHead(_direction);
-                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(465)){
-                    snakeBot.TurnHead(_direction);
-                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(795)){
-                    snakeBot.TurnHead(_direction);
+                // } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(795)){
+                //     snakeBot.TurnHead(_direction);
                 }else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(255)){
-                    snakeBot.TurnHead(_direction);
-                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(465)){
-                    snakeBot.TurnHead(_direction);
-                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(795)){
+                    snakeBot.TurnHead(new Point(0, Constants.CELL_SIZE));
+                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(450)){
                     snakeBot.TurnHead(_direction);
                 }
             }

@@ -42,28 +42,35 @@ namespace Unit05.Game.Scripting
         /// <param name="cast">The cast of actors.</param>
         private void HandleFoodCollisions(Cast cast)
         {
-            Snake snake = (Snake)cast.GetFirstActor("snake");
+            PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
             Score score = (Score)cast.GetFirstActor("score");
             List<Actor> foods = cast.GetActors("food");
-            Point snakeHead = snake.GetHead().GetPosition();
-            Point snakeRadi = snake.GetHead().GetPosition().Add(new Point(5,5));
+            List<Actor> snakeBots = cast.GetActors("snakebots");
+            // Point snakeHead = snake.GetHead().GetPosition();
+            // Point snakeRadi = snake.GetHead().GetPosition().Add(new Point(5,5));
 
             foreach(Food food in foods){
-                if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
+                if (snake.GetHead().GetPosition().Equals(food.GetPosition()))
+                // if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
                 {
                     int points = food.GetPoints();
-                    snake.GrowTail(points);
+                    snake.GrowTail(points/2);
                     score.AddPoints(points);
-                    // food.RemoveActor();
+                    cast.RemoveActor("food", food);
                 }
             }
-            
+            foreach(Snake snakeBot in snakeBots){
+                foreach(Food food in foods){
+                    if (snakeBot.GetHead().GetPosition().Equals(food.GetPosition()))
+                    {
+                        int points = food.GetPoints();
+                        snakeBot.GrowTail(points/2);
+                        cast.RemoveActor("food", food);
+                    }
+                }
+            }
         }
 
-        private double DistanceFormula(Point point1, Point point2){
-            double dis = System.Math.Sqrt((point2.GetX() - point1.GetX())^2 + (point2.GetY()-point1.GetY())^2);
-            return dis;
-        }
 
         /// <summary>
         /// Sets the game over flag if the snake collides with one of its segments.
@@ -71,20 +78,19 @@ namespace Unit05.Game.Scripting
         /// <param name="cast">The cast of actors.</param>
         private void HandleSegmentCollisions(Cast cast)
         {
-            Snake snake = (Snake)cast.GetFirstActor("snake");
+            PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
             Actor head = snake.GetHead();
             List<Actor> body = snake.GetBody();
-            List<Actor> snakebots = cast.GetActors("snakebots");
+            List<Actor> snakeBots = cast.GetActors("snakebots");
             List<Actor> food = cast.GetActors("food");
             
-            foreach (Snake snakebot in snakebots){
-                List<Actor> botBody = snakebot.GetBody();
+            foreach (Snake snakeBot in snakeBots){
+                List<Actor> botBody = snakeBot.GetBody();
                 foreach(Actor seg in body){
-                    if(snakebot.GetHead().GetPosition().Equals(seg.GetPosition())){
-                        cast.RemoveActor("snakebots", snakebot);
+                    if(snakeBot.GetHead().GetPosition().Equals(seg.GetPosition())){
+                        cast.RemoveActor("snakebots", snakeBot);
                         foreach(Actor botSeg in botBody){
                             cast.AddActor("food", new Food(botSeg.GetPosition()));
-                            // botSeg.SetColor(Constants.WHITE);
                         }
                     }
                 foreach(Actor botSeg in botBody){
@@ -92,6 +98,17 @@ namespace Unit05.Game.Scripting
                         _isGameOver = true;
                     }
                 }
+                // Console.WriteLine(snakeBots.Length());
+                // foreach(Snake snakeBot2 in snakeBots){
+                //     foreach(Actor botSeg in botBody){
+                //         if(snakeBot2.GetHead().GetPosition().Equals(botSeg.GetPosition())){
+                //             cast.RemoveActor("snakebots", snakeBot2);
+                //             foreach(Actor botSeg2 in botBody){
+                //                 cast.AddActor("food", new Food(botSeg2.GetPosition()));
+                //             }
+                //         }
+                //     }
+                // }
                 }
             }
 
@@ -107,7 +124,7 @@ namespace Unit05.Game.Scripting
         {
             if (_isGameOver == true)
             {
-                Snake snake = (Snake)cast.GetFirstActor("snake");
+                PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
                 List<Actor> segments = snake.GetSegments();
                 Food food = (Food)cast.GetFirstActor("food");
 

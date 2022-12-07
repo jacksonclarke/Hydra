@@ -19,14 +19,27 @@ namespace Unit05
         {
             // create the cast
             Cast cast = new Cast();
-            cast.AddActor("snake", new Snake(new Point(550,550)));
+            cast.AddActor("snake", new PlaySnake(new Point(135,135)));
             cast.AddActor("score", new Score());
-            // cast.AddActor("food", new Food());
-            cast.AddActor("snakebots", new Snake(new Point(450,450)));
-            cast.AddActor("snakebots", new Snake(new Point(150,150)));
-            cast.AddActor("snakebots", new Snake(new Point(250,250)));
-            cast.AddActor("snakebots", new Snake(new Point(265,265)));
-            cast.AddActor("snakebots", new Snake(new Point(275,275)));
+            for (int i = 0; i < 20; i++){
+                for (int x = 0; x <= 2; x++){
+                    cast.AddActor("food", new Food(new Point(i*15,i*15)));
+                    cast.AddActor("food", new Food(new Point(i*15,i*60)));
+                    cast.AddActor("food", new Food(new Point(i*30,i*30)));
+                    cast.AddActor("food", new Food(new Point(i*15,i*30)));
+                    cast.AddActor("food", new Food(new Point(i*45,i*15)));
+                    cast.AddActor("food", new Food(new Point(i*30,i*15)));
+                }
+            }
+            for (int i = 0; i <= 7; i++){
+                cast.AddActor("snakebots", new Snake(new Point(i*45,i*15)));
+                cast.AddActor("snakebots", new Snake(new Point(i*15,i*60)));
+                cast.AddActor("snakebots", new Snake(new Point(i*75,i*60)));
+                // cast.AddActor("snakebots", new Snake(new Point(150,150)));
+                // cast.AddActor("snakebots", new Snake(new Point(600,600)));
+                // cast.AddActor("snakebots", new Snake(new Point(450,450)));
+                // cast.AddActor("snakebots", new Snake(new Point(375,375)));
+            }
             
 
             // create the services
