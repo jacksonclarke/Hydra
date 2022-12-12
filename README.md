@@ -1,7 +1,6 @@
-# Robot Finds Kitten
-Simon Carless once described robotfindskitten as "less a game and more a way of 
-life ... It's fun to wander around until you find a kitten, at which point you feel 
-happy and can start again". I don't think I could have said it better myself!
+# Hydra
+Introducing Hydra! What happens when Slither.io and Greed have a child? You get Hydra! Kill snakes and eat food to try and get the highest score. But remember that when you cut one head off, two more take it's place... this means when you kill one snake two more will spawn! Enjoy this endless snake game using the AWSD keys to move around.
+
 
 ---
 ## Getting Started
@@ -33,5 +32,7 @@ root                    (project root folder)
 * raylib-cs 3.7.0.1
 
 ## Authors
+* John Gorriceta
+* Jackson (JT) Clarke
 * Matt Manley (manleym@byui.edu)
 * Scott Burton (burtons@byui.edu)
