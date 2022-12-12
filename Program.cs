@@ -2,6 +2,7 @@
 using Unit05.Game.Directing;
 using Unit05.Game.Scripting;
 using Unit05.Game.Services;
+using System;
 
 
 namespace Unit05
@@ -19,26 +20,21 @@ namespace Unit05
         {
             // create the cast
             Cast cast = new Cast();
-            cast.AddActor("snake", new PlaySnake(new Point(135,135)));
+            cast.AddActor("snake", new PlaySnake(new Point(150,135)));
             cast.AddActor("score", new Score());
             for (int i = 0; i < 20; i++){
                 for (int x = 0; x <= 2; x++){
-                    cast.AddActor("food", new Food(new Point(i*15,i*15)));
-                    cast.AddActor("food", new Food(new Point(i*15,i*60)));
-                    cast.AddActor("food", new Food(new Point(i*30,i*30)));
-                    cast.AddActor("food", new Food(new Point(i*15,i*30)));
-                    cast.AddActor("food", new Food(new Point(i*45,i*15)));
-                    cast.AddActor("food", new Food(new Point(i*30,i*15)));
+                    Random rand = new Random();
+                    int randomNum = rand.Next(1,10);
+                    cast.AddActor("food", new Food(new Point(i*45,i*randomNum*15)));
+                    cast.AddActor("food", new Food(new Point(i*randomNum*30,i*15)));
                 }
             }
-            for (int i = 0; i <= 7; i++){
-                cast.AddActor("snakebots", new Snake(new Point(i*45,i*15)));
-                cast.AddActor("snakebots", new Snake(new Point(i*15,i*60)));
-                cast.AddActor("snakebots", new Snake(new Point(i*75,i*60)));
-                // cast.AddActor("snakebots", new Snake(new Point(150,150)));
-                // cast.AddActor("snakebots", new Snake(new Point(600,600)));
-                // cast.AddActor("snakebots", new Snake(new Point(450,450)));
-                // cast.AddActor("snakebots", new Snake(new Point(375,375)));
+            for (int i = 0; i <= 1; i++){
+                Random rand = new Random();
+                int randomNum = rand.Next(1,10);
+                cast.AddActor("snakebots", new Snake(new Point(randomNum*i*45,i*30)));
+                cast.AddActor("snakebots", new Snake(new Point(randomNum*30,randomNum*i*60)));
             }
             
 

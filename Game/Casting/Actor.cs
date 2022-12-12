@@ -17,6 +17,7 @@ namespace Unit05.Game.Casting
         private Color _color = Constants.WHITE;
         private Point _position = new Point(0, 0);
         private Point _velocity = new Point(0, 0);
+        private Point _size = new Point(0,0);
 
         /// <summary>
         /// Constructs a new instance of Actor.
@@ -59,6 +60,11 @@ namespace Unit05.Game.Casting
         public string GetText()
         {
             return _text;
+        }
+
+        public virtual void SizeTo(int width, int height) 
+        {
+            _size = new Point(width, height);
         }
 
         /// <summary>

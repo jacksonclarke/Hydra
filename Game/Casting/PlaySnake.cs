@@ -68,17 +68,19 @@ namespace Unit05.Game.Casting
             //     segment.SetColor(Constants.GREEN);
             //     _segments.Add(segment);
             // }
-            Actor tail = _segments.Last<Actor>();
-            Point velocity = tail.GetVelocity();
-            Point offset = velocity.Reverse();
-            Point position = tail.GetPosition().Add(offset);
+            if (_segments.Count <= 40){
+                Actor tail = _segments.Last<Actor>();
+                Point velocity = tail.GetVelocity();
+                Point offset = velocity.Reverse();
+                Point position = tail.GetPosition().Add(offset);
 
-            Actor segment = new Actor();
-            segment.SetPosition(position);
-            segment.SetVelocity(velocity);
-            segment.SetText("#");
-            segment.SetColor(Constants.BLUE);
-            _segments.Add(segment);
+                Actor segment = new Actor();
+                segment.SetPosition(position);
+                segment.SetVelocity(velocity);
+                segment.SetText("#");
+                segment.SetColor(Constants.BLUE);
+                _segments.Add(segment);
+            }
         }
 
         /// <inheritdoc/>

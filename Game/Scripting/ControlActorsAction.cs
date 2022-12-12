@@ -51,29 +51,39 @@ namespace Unit05.Game.Scripting
             {
                 _direction = new Point(0, Constants.CELL_SIZE);
             }
-            if (_keyboardService.IsKeyDown("space"))
-            {
-                // _direction = new Point(0, Contants.CELL_SIZE);
-                Console.WriteLine("SPACE BARRRR");
-            }
 
             PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
             snake.TurnHead(_direction);
             List<Actor> snakeBots = cast.GetActors("snakebots");
             foreach(Snake snakeBot in snakeBots){
+                Random rand = new Random();
+                int randDir = rand.Next(1,4);
                 if ((snakeBot.GetHead().GetPosition().GetX()).Equals(255)){
-                    snakeBot.TurnHead(_direction);
-                // } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(795)){
-                //     snakeBot.TurnHead(_direction);
-                }else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(255)){
-                    snakeBot.TurnHead(new Point(0, Constants.CELL_SIZE));
-                } else if ((snakeBot.GetHead().GetPosition().GetY()).Equals(450)){
-                    snakeBot.TurnHead(_direction);
+                    if (randDir == 2){
+                        snakeBot.TurnHead(new Point(Constants.CELL_SIZE,0));
+                    }else if (randDir == 1){
+                        snakeBot.TurnHead(new Point(Constants.CELL_SIZE,-Constants.CELL_SIZE));
+                    }else{
+                        snakeBot.TurnHead(_direction);
+                    }
+                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(450)){
+                    if (randDir == 1){
+                        snakeBot.TurnHead(_direction);
+                    }else if (randDir == 4){
+                        snakeBot.TurnHead(new Point(Constants.CELL_SIZE,-Constants.CELL_SIZE));
+                    }else{
+                        snakeBot.TurnHead(new Point(Constants.CELL_SIZE,Constants.CELL_SIZE));
+                    }
+                } else if ((snakeBot.GetHead().GetPosition().GetX()).Equals(795)){
+                    if (randDir == 2){
+                        snakeBot.TurnHead(new Point(0, -Constants.CELL_SIZE));
+                    }else if (randDir == 3){
+                        snakeBot.TurnHead(_direction);
+                    }else{
+                        snakeBot.TurnHead(new Point(Constants.CELL_SIZE, -Constants.CELL_SIZE));
+                    }
                 }
             }
-
-
-
         }
     }
 }

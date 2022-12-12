@@ -51,7 +51,6 @@ namespace Unit05.Game.Scripting
 
             foreach(Food food in foods){
                 if (snake.GetHead().GetPosition().Equals(food.GetPosition()))
-                // if (DistanceFormula(snakeHead, food.GetPosition()) < DistanceFormula(snakeRadi, snakeHead))
                 {
                     int points = food.GetPoints();
                     snake.GrowTail(points/2);
@@ -92,6 +91,10 @@ namespace Unit05.Game.Scripting
                         foreach(Actor botSeg in botBody){
                             cast.AddActor("food", new Food(botSeg.GetPosition()));
                         }
+                        if (snakeBots.Count < 15){
+                            cast.AddActor("snakebots", new Snake(new Point(300,150)));
+                            cast.AddActor("snakebots", new Snake(new Point(795,300)));
+                        }
                     }
                 foreach(Actor botSeg in botBody){
                     if(head.GetPosition().Equals(botSeg.GetPosition())){
@@ -126,7 +129,6 @@ namespace Unit05.Game.Scripting
             {
                 PlaySnake snake = (PlaySnake)cast.GetFirstActor("snake");
                 List<Actor> segments = snake.GetSegments();
-                Food food = (Food)cast.GetFirstActor("food");
 
                 // create a "game over" message
                 int x = Constants.MAX_X / 2;
