@@ -32,7 +32,7 @@ root                    (project root folder)
 * raylib-cs 3.7.0.1
 
 ## Authors
+* Jackson Clarke
 * John Gorriceta
-* Jackson (JT) Clarke
-* Matt Manley (manleym@byui.edu)
-* Scott Burton (burtons@byui.edu)
+* Matt Manley
+* Scott Burton 
